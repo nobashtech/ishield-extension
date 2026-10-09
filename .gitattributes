@@ -1,2 +1,10 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalize text files across platforms
+* text=auto eol=lf
+
+# Generated filter/runtime artifacts: keep in source for reproducibility, but avoid noisy GitHub diffs.
+extensions/*/content/adguard-*-main.js linguist-generated=true
+extensions/*/content/adguard-content.js linguist-generated=true
+extensions/*/rules/production/*.json linguist-generated=true
+extensions/*/rules/scripting/** linguist-generated=true
+extensions/*/web-accessible-resources/redirects/** linguist-generated=true
+extensions/shared/adguard/** linguist-generated=true

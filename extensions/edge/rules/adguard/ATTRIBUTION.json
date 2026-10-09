@@ -1,0 +1,29 @@
+{
+  "repository": "AdguardTeam/FiltersRegistry",
+  "commit": "340fd2d698d735f8eed3591eee17877dc08db70e",
+  "date": "2026-10-03T22:02:07Z",
+  "license": "GPL-3.0",
+  "lists": [
+    {
+      "id": "ads",
+      "path": "filters/filter_2_Base/filter.txt",
+      "url": "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/340fd2d698d735f8eed3591eee17877dc08db70e/filters/filter_2_Base/filter.txt",
+      "sourceSha256": "c7b8481ba4967b41799ac65d1ea4a22ab9ce2148ea353986816da720c466accd",
+      "sha256": "f40cba5b95c83ea49b7e9592f80162550c067e800a30a8092f3a912c898b350d",
+      "ruleCount": 60453,
+      "rejected": 34,
+      "localPrivacyExclusions": 5,
+      "localPrivacyExclusionReason": "Removed five imported, site-specific source rules that could originate their own network requests; general blocking and scriptlet engines are retained.",
+      "generatedStaleActionRemoved": "A stale wcostream-specific generated action from an older imported filter revision was also removed from generated browser bundles."
+    },
+    {
+      "id": "privacy",
+      "path": "filters/filter_3_Spyware/filter.txt",
+      "url": "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/340fd2d698d735f8eed3591eee17877dc08db70e/filters/filter_3_Spyware/filter.txt",
+      "sourceSha256": "ef1e1616206957f0abc6674c762771cc93c3fa0598fe1030cf655f01a21603a3",
+      "sha256": "aca1b118f491073a4dd89a2bb6782d39d9b6ba8891ad92bad04ebf735ad109ea",
+      "ruleCount": 836,
+      "rejected": 1
+    }
+  ]
+}

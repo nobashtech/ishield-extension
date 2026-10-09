@@ -1,0 +1,31 @@
+{
+  "name": "ishield-extension",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Source code for iShield Extension browser protection",
+  "type": "module",
+  "scripts": {
+    "audit": "node scripts/audit_privacy.mjs",
+    "build": "npm run audit && python3 scripts/build_packages.py",
+    "test:update": "node --test tests/filter-update.test.mjs",
+    "test": "npm run audit && npm run test:update && node --test tests/facebook-ads.test.mjs",
+    "build:firefox-generated": "node scripts/build_adguard_firefox.mjs",
+    "package:firefox": "python3 scripts/package_firefox_amo.py",
+    "build-for-amo": "npm run guard:filters && npm run build:firefox-generated && npm run guard:filters && npm run audit && npm run test:update && npm run package:firefox",
+    "guard:filters": "python3 scripts/prune_network_filter_exceptions.py --verify-only",
+    "build:generated": "node scripts/build_adguard_content.mjs",
+    "build:opera": "npm run guard:filters && npm run build:generated && npm run guard:filters && npm run audit && npm run test:update && python3 scripts/build_packages.py",
+    "preflight:release": "python3 scripts/release_preflight.py",
+    "ci": "npm run guard:filters && npm run audit && npm run test:update && npm run preflight:release"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "devDependencies": {
+    "@adguard/dnr-rulesets": "5.0.20260907123943",
+    "@adguard/tswebextension": "5.0.3",
+    "esbuild": "0.28.1",
+    "@adguard/tsurlfilter": "6.0.3",
+    "@adguard/extended-css": "2.2.0"
+  }
+}

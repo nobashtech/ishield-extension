@@ -1,0 +1,236 @@
+[
+  {
+    "id": 2001,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "criteo.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2002,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "criteo.net"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2003,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "scorecardresearch.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2004,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "quantserve.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2005,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "demdex.net"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2006,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "openx.net"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2007,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "outbrain.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2008,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "taboola.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2009,
+    "priority": 110,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "mathtag.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  }
+]

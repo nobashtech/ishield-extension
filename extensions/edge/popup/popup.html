@@ -1,0 +1,403 @@
+<!doctype html>
+<!-- iShield Extension clean source markup. Purpose: readable reviewed local UI; shared browser parity is preserved. -->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iShield Extension</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <button id="brandHomeButton" class="brand-row" type="button" aria-label="Go to Home">
+        <span class="brand-mark" aria-hidden="true"><img src="../icons/icon-128.png" alt="" width="28" height="32"></span>
+        <span class="brand-copy"><span class="brand">iShield Extension</span><span class="brand-tagline">Ad Blocker &amp; Privacy Protection</span></span>
+      </button>
+      <div class="header-tools">
+        <button id="settingsButton" class="icon-button" type="button" aria-label="Open settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.2 2h-.4a2 2 0 0 0-2 2v.2a2 2 0 0 1-1 1.7l-.4.3a2 2 0 0 1-2 0l-.2-.1a2 2 0 0 0-2.7.7l-.2.4a2 2 0 0 0 .7 2.7l.2.1a2 2 0 0 1 1 1.7v.5a2 2 0 0 1-1 1.8l-.2.1a2 2 0 0 0-.7 2.7l.2.4a2 2 0 0 0 2.7.7l.2-.1a2 2 0 0 1 2 0l.4.3a2 2 0 0 1 1 1.7v.2a2 2 0 0 0 2 2h.4a2 2 0 0 0 2-2v-.2a2 2 0 0 1 1-1.7l.4-.3a2 2 0 0 1 2 0l.2.1a2 2 0 0 0 2.7-.7l.2-.4a2 2 0 0 0-.7-2.7l-.2-.1a2 2 0 0 1-1-1.8v-.5a2 2 0 0 1 1-1.7l.2-.1a2 2 0 0 0 .7-2.7l-.2-.4a2 2 0 0 0-2.7-.7l-.2.1a2 2 0 0 1-2 0l-.4-.3a2 2 0 0 1-1-1.7V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button id="headerMoreButton" class="header-more" type="button" aria-label="More options">⋮</button>
+      </div>
+    </header>
+
+    <dialog id="siteDetailsDialog" class="site-dialog" aria-labelledby="siteDetailsTitle">
+      <div class="detail-toolbar"><button id="closeSiteDetails" class="detail-back" type="button">← <span>Back</span></button><button id="dismissSiteDetails" class="icon-button" type="button" aria-label="Close website details">×</button></div>
+      <div class="detail-site-header"><span class="detail-site-icon"><img class="site-favicon" alt="" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></svg></span><div><h2 id="siteDetailsTitle">Website details</h2><p class="detail-connection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="detailConnection"></span></p></div><span id="detailSafety" class="status-pill"></span></div>
+      <div id="siteOverviewPanel" role="tabpanel">
+      <div class="detail-status"><span class="detail-shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span><div><strong id="detailProtection"></strong><p id="detailStatusText" class="subtle"></p></div><span id="detailToggleSlot"></span></div>
+      <section class="detail-blocked"><div class="card-head"><h3>Blocked on this page</h3><span id="detailTotal" class="mini-pill"></span></div>
+      <dl class="detail-counts"><div><dt><span class="tone-red">AD</span>Ads blocked</dt><dd id="detailAds">—</dd></div><div><dt><span class="tone-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l18 18M3 12c4-9 14-9 18 0-4 9-14 9-18 0Z"/><circle cx="12" cy="12" r="3"/></svg></span>Trackers blocked</dt><dd id="detailTrackers">—</dd></div><div><dt><span class="tone-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 10 18H2Z M12 9v5m0 3v1"/></svg></span>Scams blocked</dt><dd id="detailScams">—</dd></div><div><dt><span class="tone-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span>Threats blocked</dt><dd id="detailThreats">—</dd></div></dl></section>
+      <section class="detail-quick"><h3>Quick actions</h3>          <div class="actions">
+            <button id="allowlistButton" class="action" type="button" title="Allow ads and pause automatic protection on this website">
+              <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m4 7.4 1.7 1.7L8.6 6M4 16.6l1.7 1.7 2.9-3.1M12 7.5h8M12 16.7h8"/></svg></span>
+              <span>Allow on this site</span>
+            </button>
+            <button id="fixSiteButton" class="action" type="button" title="Try local compatibility recovery for this site">
+              <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V4M5.5 4.6h11.3l-2 3.9 2 3.9H5.5"/></svg></span>
+              <span>Fix site</span>
+            </button>
+          </div><button id="detailBlock" class="action" type="button"><span class="quick-icon quick-red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="m6 6 12 12"/></svg></span>Block on this site</button><button id="detailSiteSettings" class="action" type="button"><span class="quick-icon" aria-hidden="true">⚙</span>Site settings</button></section>
+      <div class="detail-tip"><span aria-hidden="true">ⓘ</span><div><strong>Tip</strong><p>Manage site exceptions and custom blocking rules from Filters.</p></div></div>
+      </div>
+      <p id="detailCountNote" class="detail-count-note"></p>
+    </dialog>
+
+
+    <dialog id="ruleWarningDialog" class="confirmation-dialog" aria-labelledby="ruleWarningTitle" aria-describedby="ruleWarningText">
+      <div class="confirmation-icon" aria-hidden="true">!</div><h2 id="ruleWarningTitle">Confirm permanent block</h2>
+      <p id="ruleWarningText"></p><div class="rule-preview"><span>Rule target</span><strong id="ruleWarningTarget"></strong></div>
+      <p id="ruleWarningPersistence" class="subtle">This rule stays active after a restart and while protection is paused. It overrides site exceptions.</p>
+      <div class="recovery-guide"><strong>Need to undo it?</strong><span>Go to Filters → My rules → Blocked and choose Remove. Then reload the affected website.</span></div>
+      <div class="confirmation-actions"><button id="cancelRuleWarning" class="secondary" type="button">Cancel</button><button id="confirmRuleWarning" class="primary-button" type="button">Add permanent block</button></div>
+    </dialog>
+    <dialog id="historyWarningDialog" class="confirmation-dialog" aria-labelledby="historyWarningTitle"><h2 id="historyWarningTitle">Clear detailed history?</h2><p>This removes saved event entries on this device. Blocked totals and your protection settings stay unchanged.</p><div class="confirmation-actions"><button id="cancelHistoryWarning" class="secondary" type="button">Cancel</button><button id="confirmHistoryWarning" class="primary-button" type="button">Clear history</button></div></dialog>
+
+    <dialog id="filterDetailsDialog" class="confirmation-dialog" aria-labelledby="filterDetailsName"><h2 id="filterDetailsName"></h2><p id="filterDetailsDescription"></p><p id="filterDetailsCount"></p><div class="confirmation-actions"><button id="closeFilterDetails" class="secondary" type="button">Close</button></div></dialog>
+    <dialog id="exclusionsDialog" class="confirmation-dialog exclusions-dialog" aria-labelledby="exclusionsTitle"><div class="statistics-options-heading"><h2 id="exclusionsTitle">Excluded websites</h2><button id="closeExclusions" class="icon-button" type="button" aria-label="Close excluded websites">×</button></div><p class="subtle">Allowed websites and active recovery exceptions. Remove an entry to restore filtering for that domain.</p><div id="exclusionsList"></div><p id="exclusionsError" role="status"></p></dialog>
+    <dialog id="fullResetDialog" class="confirmation-dialog" aria-labelledby="fullResetTitle"><h2 id="fullResetTitle">Reset iShield Extension completely?</h2><p>This permanently removes your settings, allowed websites, recovery exceptions, custom blocking rules, saved filter updates, counters and activity history.</p><p>Protection will return to its defaults. Appearance resets to dark. This cannot be undone.</p><div class="confirmation-actions"><button id="cancelFullReset" class="secondary" type="button">Cancel</button><button id="confirmFullReset" class="primary-button" type="button">Reset everything</button></div><p id="fullResetError" role="status"></p></dialog>
+    <main class="content" id="content" aria-live="polite">
+      <section id="overviewView" class="view">
+        <section id="statusBanner" class="banner" data-tone="active">
+          <div class="banner-art protection-animation" aria-hidden="true"><svg viewBox="0 0 80 80"><defs><linearGradient id="protectionShield" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8c6aff"/><stop offset="1" stop-color="#4930ed"/></linearGradient></defs><circle cx="40" cy="40" r="39" fill="#a08aff" opacity=".14"/><circle cx="40" cy="40" r="32" fill="#a08aff" opacity=".2"/><path d="M40 13C47 18 55 21 61 23Q63 24 63 29V40C63 55 54 65 40 71C26 65 17 55 17 40V29Q17 24 19 23C25 21 33 18 40 13Z" fill="url(#protectionShield)"/><path d="m29 40 8 8 15-18" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="banner-copy">
+            <div id="bannerEyebrow" class="banner-eyebrow">CHECKING PROTECTION</div>
+            <div id="bannerTitle" class="banner-title">Checking protection…</div>
+            <div id="statusText" class="banner-sub">One moment</div>
+            <div class="banner-assurance"><span class="assurance-shield" aria-hidden="true">✓</span><span id="bannerScope">Applies to this website</span></div>
+          </div>
+          <button id="protectionToggle" class="toggle" type="button" role="switch" aria-checked="true" aria-label="Protection on this website" disabled>
+            <span id="protectionSwitchLabel" class="protection-switch-label" aria-hidden="true">Protection On</span>
+            <span class="toggle-knob" aria-hidden="true">
+              <svg class="knob-on" viewBox="0 0 24 24"><path d="m5.5 12.5 4.2 4.2 8.8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg class="knob-off" viewBox="0 0 24 24"><rect x="7" y="6" width="3.4" height="12" rx="1.2" fill="currentColor"/><rect x="13.6" y="6" width="3.4" height="12" rx="1.2" fill="currentColor"/></svg>
+            </span>
+          </button>
+        </section>
+
+        <div class="page-metrics-heading"><span>Blocked on this page</span><strong id="homePageTotal">— total</strong></div><p id="homeOtherActions" class="page-other-actions" hidden></p>
+        <section class="stats" aria-label="Blocked on this page">
+          <div class="stat stat-ads"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></span><strong id="pageAds">—</strong><span class="stat-label">Ads blocked</span></div>
+          <div class="stat stat-trackers"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C16 4 19 4 21 4v7c0 6-4 9-9 12-5-3-9-6-9-12V4c2 0 5 0 9-2Z"/><circle cx="12" cy="11" r="5" fill="#122338"/><circle cx="12" cy="11" r="2.5"/></svg></span><strong id="pageTrackers">—</strong><span class="stat-label">Trackers blocked</span></div>
+          <div class="stat stat-scams"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6 2.9 19.4h18.2L12 3.6Z"/><path d="M12 10v4.4M12 17.1h.01"/></svg></span><strong id="pageScams">—</strong><span class="stat-label">Scams</span></div>
+          <div class="stat stat-threats"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span><strong id="pageThreats">—</strong><span class="stat-label">Threats</span><strong id="pageDataSaved" hidden>—</strong></div>
+        </section>
+
+        <p id="pageCountsNote" class="page-counts-note">Activity on this page</p>
+
+        <section class="card site-card">
+          <div class="card-head"><h2 class="card-title">Current Website</h2><button id="siteDetailsButton" class="site-details-button" type="button">View Details <span aria-hidden="true">→</span></button></div>
+          <div class="site-summary"><div class="site-top"><img class="site-favicon" alt="" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9S14.6 18.4 12 21c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3Z"/></svg>
+            <span id="siteHost" class="site-host">Unavailable</span>
+            <span id="sitePill" class="status-pill" data-tone="off"><i class="dot"></i><span id="sitePillText">Checking</span></span>
+          </div>
+          <div class="site-connection"><span aria-hidden="true">♙</span> <span id="siteConnection">Checking connection…</span></div>
+          </div><div class="site-meta">
+            <span class="site-total"><strong id="tabActionCount">—</strong> blocked on this page</span>
+            <span id="networkSyncPill" class="mini-pill" title="The count is read from the browser when you open iShield Extension">Local</span>
+          </div>
+
+        </section>
+
+        <section class="card">
+          <div class="card-head tight">
+            <h2 class="card-title">Protection Layers</h2>
+            <span id="layersNote" class="card-note"></span>
+          </div>
+          <div class="features" id="featureGrid">
+            <button class="feature" type="button" role="switch" aria-checked="true" data-feature="ads" title="Ad and annoyance network rules, cosmetic filtering and scriptlets">
+              <span class="feature-badge tone-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></span><span class="feature-copy"><span class="feature-label">Ad blocking</span><span class="feature-description">Block ads and pop-ups</span></span><span class="switch-visual" aria-hidden="true"></span>
+            </button>
+            <button class="feature" type="button" role="switch" aria-checked="true" data-feature="privacy" title="Tracker rules, tracking-parameter cleanup and fingerprint hardening">
+              <span class="feature-badge tone-teal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 5c5-2 15-2 20 0v7c0 8-8 9-10 4-2 5-10 4-10-4Z"/><path d="M5 10c1-1 4-1 5 1-1 3-4 3-5-1Zm9 1c1-2 4-2 5-1-1 4-4 4-5 1Z" fill="#0c1929"/></svg></span><span class="feature-copy"><span class="feature-label">Privacy protection</span><span class="feature-description">Stop trackers</span></span><span class="switch-visual" aria-hidden="true"></span>
+            </button>
+            <button class="feature" type="button" role="switch" aria-checked="true" data-feature="phishing" title="Warns before phishing and malware pages">
+              <span class="feature-badge tone-indigo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="feature-copy"><span class="feature-label">Phishing protection</span><span class="feature-description">Block deceptive websites</span></span><span class="switch-visual" aria-hidden="true"></span>
+            </button>
+            <button class="feature" type="button" role="switch" aria-checked="true" data-feature="scam" title="Warns before scam pages">
+              <span class="feature-badge tone-orange" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 10 18H2Z"/><path d="M12 9v5m0 3v1"/></svg></span><span class="feature-copy"><span class="feature-label">Scam protection</span><span class="feature-description">Detect suspicious content</span></span><span class="switch-visual" aria-hidden="true"></span>
+            </button>
+
+          </div>
+        </section>
+      </section>
+
+      <section id="siteView" class="view site-screen" hidden>
+        <div class="screen-heading site-screen-heading">
+          <div class="site-identity">
+            <span class="site-screen-icon"><img class="site-favicon" alt="" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></svg></span>
+            <div><h2 id="siteViewHost">Current website</h2><p id="siteViewStatus" class="site-active-text">Checking protection…</p></div>
+          </div>
+          <span id="siteViewConnection" class="site-screen-connection" hidden>Checking…</span>
+        </div>
+
+        <p id="sitePageTotal" class="page-other-actions"></p>
+        <section class="site-metrics" aria-label="Current website statistics">
+          <div class="site-metric metric-ads"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></span><strong id="siteAdsBlocked">—</strong><span>Ads blocked</span></div>
+          <div class="site-metric metric-trackers"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 9 3v7c0 6-5 9-9 11-4-2-9-5-9-11V5Z"/><circle cx="12" cy="11" r="5" fill="#f5f4fa"/><circle cx="12" cy="11" r="2.5"/></svg></span><strong id="siteTrackersBlocked">—</strong><span>Trackers blocked</span></div>
+          <div class="site-metric metric-social" title="Not separately measured by the current engine"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="7" r="4"/><path d="M0 21v-3a8 8 0 0 1 16 0v3Z"/><rect x="15" y="3" width="8" height="16" rx="3"/><path d="M17 8h4m-4 5h4" fill="none" stroke="#fff" stroke-width="2"/></svg></span><strong id="siteSocialItems">—</strong><span>Social Media Items</span></div>
+          <div class="site-metric metric-scams"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 10 18H2Z"/><path d="M12 9v5m0 3v1"/></svg></span><strong id="siteScamsBlocked">—</strong><span>Scams</span></div>
+          <div class="site-metric metric-popups" title="Not separately measured by the current engine"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 8h20"/><rect x="15" y="14" width="8" height="8" rx="2"/></svg></span><strong id="sitePopupsBlocked">—</strong><span>Blocked Pop-ups</span></div>
+          <div class="site-metric metric-threats"><span class="site-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span><strong id="siteThreatsBlocked">—</strong><span>Threats</span></div>
+        </section>
+        <div hidden><strong id="siteTotalBlocked">—</strong><strong id="siteDataSaved">—</strong><strong id="siteCosmeticFixes">—</strong></div>
+        <section class="card site-actions-card">
+          <div class="card-head"><h2 class="card-title">Quick actions</h2></div>
+          <div class="site-action-grid">
+            <button id="siteAllowAction" class="site-action" type="button"><span class="quick-allow" aria-hidden="true">✓</span><div><strong>Disable iShield Extension</strong><small>Turn off on this website</small></div></button>
+            <button id="siteBlockAction" class="site-action" type="button"><span class="quick-block" aria-hidden="true">⊘</span><div><strong>Block this website</strong><small>Create a website block rule</small></div></button>
+          </div>
+          <p class="site-quick-tip"><span aria-hidden="true">ⓘ</span>Manage site exceptions and custom blocking rules from Filters.</p>
+        </section>
+        <section class="site-recent-section"><h3>Recent Activity</h3><div id="siteRecentActivity" aria-live="polite"><p class="site-activity-empty">No activity recorded on this page yet.</p></div></section>
+
+        <section class="card site-control-card">
+          <div class="site-control-copy"><span class="site-control-icon">✓</span><div><strong>Protection on this site</strong><p id="siteControlText">iShield Extension is actively protecting this website.</p></div></div>
+          <div id="siteToggleSlot" class="site-toggle-slot"></div>
+        </section>
+
+
+
+        <section class="card site-modules-card">
+          <div class="card-head"><h2 class="card-title">Protection modules</h2><span class="mini-pill">Live</span></div>
+          <div class="site-module-list">
+            <div data-site-feature="ads"><span class="module-dot module-blue"></span><span><strong>Ad Blocking</strong><small>Ads, pop-ups and sponsored content</small></span><b>On</b></div>
+            <div data-site-feature="privacy"><span class="module-dot module-purple"></span><span><strong>Tracker Protection</strong><small>Analytics and tracking requests</small></span><b>On</b></div>
+            <div data-site-feature="cosmetic"><span class="module-dot module-teal"></span><span><strong>Cosmetic Filtering</strong><small>Empty ad spaces and page cleanup</small></span><b>On</b></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="activityView" class="view statistics-screen" hidden>
+        <div class="view-heading statistics-heading"><h2>Statistics</h2><select id="statisticsPeriodSelect" aria-label="Statistics period"><option value="today">Today</option><option value="week" selected>Last 7 days</option><option value="month">Last 30 days</option><option value="all">All time</option></select></div>
+
+        <section class="stats" aria-label="Observed protection statistics">
+          <button class="stat stat-ads" type="button" data-activity-metric="ads" aria-label="Details about ads blocked"><span class="metric-chevron" aria-hidden="true">›</span><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></span><strong id="statsAds">0</strong><span class="stat-label">Ads blocked</span><svg class="activity-sparkline" data-sparkline="ads" viewBox="0 0 100 22" role="img" aria-label="Ads blocked history"></svg></button>
+          <button class="stat stat-trackers" type="button" data-activity-metric="trackers" aria-label="Details about trackers blocked"><span class="metric-chevron" aria-hidden="true">›</span><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 9 3v7c0 6-5 9-9 11-4-2-9-5-9-11V5Z"/><circle cx="12" cy="11" r="5" fill="#f5f4fa"/><circle cx="12" cy="11" r="2.5"/></svg></span><strong id="statsTrackers">0</strong><span class="stat-label">Trackers blocked</span><svg class="activity-sparkline" data-sparkline="trackers" viewBox="0 0 100 22" role="img" aria-label="Trackers blocked history"></svg></button>
+          <button class="stat stat-scams" type="button" data-activity-metric="scams" aria-label="Details about scams blocked"><span class="metric-chevron" aria-hidden="true">›</span><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6 2.9 19.4h18.2L12 3.6Z"/><path d="M12 10v4.4M12 17.1h.01"/></svg></span><strong id="statsScams">0</strong><span class="stat-label">Scams blocked</span><svg class="activity-sparkline" data-sparkline="scams" viewBox="0 0 100 22" role="img" aria-label="Scams blocked history"></svg></button>
+          <button class="stat stat-threats" type="button" data-activity-metric="threats" aria-label="Details about threats blocked"><span class="metric-chevron" aria-hidden="true">›</span><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 5.8v5.1c0 4.6 2.9 8 7 9.1 4.1-1.1 7-4.5 7-9.1V5.8L12 3Z"/><path d="M12 8.4v4.3M12 15.3h.01"/></svg></span><strong id="statsThreats">0</strong><span class="stat-label">Threats blocked</span><svg class="activity-sparkline" data-sparkline="threats" viewBox="0 0 100 22" role="img" aria-label="Threats blocked history"></svg></button>
+          <div class="stat stat-saved" title="Data savings are not measured by the current engine"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 11c0 4 16 4 16 0M4 16c0 4 16 4 16 0"/></svg></span><strong id="statisticsDataSaved">—</strong><span class="stat-label">Data Saved</span></div>
+        </section>
+
+        <section class="card hero-card">
+          <div class="hero-main">
+            <div class="hero-copy">
+              <div class="eyebrow">Total blocked</div>
+              <div id="activityTotal" class="hero-number">0</div>
+              <div id="activityPeriodLabel" class="subtle">Today</div>
+            </div>
+            <div id="chartWrap" class="chart-wrap" hidden>
+              <div id="activityChartTooltip" class="activity-chart-tooltip" role="status" hidden></div><svg id="activityChart" class="chart" viewBox="0 0 210 72" role="img" aria-label="Recorded blocking activity"></svg><div id="activityChartCaption" class="activity-chart-caption"></div><div class="statistics-chart-legend" aria-label="Chart legend"><span><i class="legend-ads"></i>Ads</span><span><i class="legend-trackers"></i>Trackers</span><span><i class="legend-other"></i>Other</span></div>
+            </div>
+          </div>
+          <div id="composeBar" class="compose" role="img" aria-label="Share of blocked items by type"></div>
+        </section>
+
+
+
+
+
+        <dialog id="statisticsOptionsDialog" class="statistics-options-dialog" aria-labelledby="statisticsOptionsTitle"><div class="statistics-options-heading"><h2 id="statisticsOptionsTitle">Activity options</h2><button id="closeStatisticsOptions" class="icon-button" type="button" aria-label="Close activity options">×</button></div>
+        <div class="activity-toolbar"><div class="periods segmented" role="group" aria-label="Statistics period">
+          <button class="period seg" type="button" data-period="today">Today</button>
+          <button class="period seg is-active" type="button" data-period="week">Week</button>
+          <button class="period seg" type="button" data-period="month">Month</button>
+          <button class="period seg" type="button" data-period="all">All time</button>
+        </div><label class="activity-scope-control"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg><select id="activityScope" aria-label="Activity scope"><option value="page">This page</option><option value="all" selected>All websites</option></select></label></div>
+        <section class="card recent-card activity-log-card"><div class="card-head"><h2 id="recentActivityTitle" class="card-title">Recent activity</h2><button id="clearActivity" class="text-button" type="button">Clear history</button></div>
+          <div id="clearActivityPrompt" class="clear-prompt" hidden><span>Clear event history? Blocked totals are kept.</span><div><button id="confirmClearActivity" class="secondary" type="button">Clear</button><button id="cancelClearActivity" class="text-button" type="button">Cancel</button></div></div>
+          <p id="activityListNote" class="activity-list-note"></p><div id="recentActivity" aria-live="polite"></div>
+          <div class="activity-pagination"><button id="activityPrevious" class="secondary" type="button" aria-label="Previous activity page">← Previous</button><span id="activityPageLabel" role="status">Page 1 of 1</span><button id="activityNext" class="secondary" type="button" aria-label="Next activity page">Next →</button></div>
+          <p class="coverage-note">Private by design: URLs and website history are not saved.</p>
+        </section>
+
+        <details class="card policy-detail">
+          <summary class="card-title">Other protection activity</summary>
+          <div class="bar-rows">
+            <div class="bar-row"><span class="bar-label">Phishing</span><span class="bar-track"><i class="bar-fill tone-indigo-fill" id="barPhishing"></i></span><strong id="statsPhishing">0</strong></div>
+            <div class="bar-row"><span class="bar-label">Malware</span><span class="bar-track"><i class="bar-fill tone-red-fill" id="barMalware"></i></span><strong id="statsMalware">0</strong></div>
+            <div class="bar-row"><span class="bar-label">Privacy actions</span><span class="bar-track"><i class="bar-fill tone-teal-fill" id="barPrivacy"></i></span><strong id="statsPrivacy">0</strong></div>
+            <div class="bar-row"><span class="bar-label">Custom rules</span><span class="bar-track"><i class="bar-fill tone-slate-fill" id="barStrict"></i></span><strong id="statsStrict">0</strong></div>
+          </div>
+        </details>
+        </dialog>
+      </section>
+
+      <section id="strictView" class="view filters-screen" hidden>
+        <div class="subscreen-heading"><button id="filtersBack" class="back-button" type="button" aria-label="Back to settings">←</button><div><h2 id="filtersScreenTitle">Filter Lists</h2><p>Choose which lists protect your browsing.</p></div></div>
+        <div id="filtersTabs" class="segmented" role="tablist" aria-label="Filters sections">
+          <button class="seg is-active" type="button" role="tab" aria-selected="true" data-filters-tab="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>Filter lists</button>
+          <button class="seg" type="button" role="tab" aria-selected="false" data-filters-tab="rules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h6m5 0h7M3 18h11m5 0h2"/><circle cx="11" cy="6" r="2"/><circle cx="16" cy="18" r="2"/></svg>My rules</button>
+        </div>
+
+        <div id="filtersLists" class="stack">
+
+
+
+
+          <div class="prebuilt-head"><h2>Prebuilt filter lists</h2><span id="prebuiltListCount"></span></div><div class="filter-use-summary"><strong id="filterUsedRules">—</strong><span>active rules</span><small id="filterUsedLists">Checking lists…</small></div><div id="filterGroups" class="stack"></div>
+          <button id="customRulesRow" class="filter-card custom-rules-row" type="button"><span class="catalog-icon tone-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg></span><span class="filter-copy"><strong>Custom rules</strong><small>Your own permanent blocks and site exceptions.</small></span><span id="customRulesCount" class="catalog-rule-count"></span><span class="catalog-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span></button>
+          <button id="browseFilterLists" class="browse-filter-lists" type="button" aria-expanded="false"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" stroke="none"/><path d="M12 7v10M7 12h10" stroke="white"/></svg></span><strong id="browseFilterLabel">Browse and add more filter lists</strong><span class="catalog-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span></button>
+          <section class="card filter-global-card"><span class="catalog-icon tone-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></span><div><h2>Protection on all websites</h2><p id="filterGlobalProtectionStatus"></p></div><button id="filterGlobalProtectionToggle" class="filter-switch" role="switch" aria-checked="true" aria-label="Protection on all websites" type="button"><span class="switch-visual" aria-hidden="true"></span></button><p class="filter-global-note">Pauses automatic filtering and warnings everywhere. Allowed sites and layer preferences are remembered. Your saved Strict rules stay enforced.</p></section>
+
+          <details class="filter-information"><summary>Filter information &amp; updates</summary>
+          <section class="card filters-hero"><h2>Active filters</h2><div class="filters-summary"><span class="filters-summary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Z" fill="currentColor" stroke="none"/><path d="m2 12 10 5 10-5M2 16l10 5 10-5"/></svg></span><div class="filters-summary-copy"><strong id="filtersRuleCount">—</strong><span id="filtersRuleNote">Checking browser rules…</span></div></div><div class="budget"><div class="budget-bar" role="img" aria-label="Browser rule budget in use"><i id="budgetFill" class="budget-fill"></i></div><div id="budgetNote" class="budget-note"></div></div><small id="pageCleanupNote"></small></section>
+          <section class="card update-card"><span class="update-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11A8 8 0 0 0 6 6M4 3v5h5M4 13a8 8 0 0 0 14 5m2 3v-5h-5"/></svg></span><div class="update-copy"><h2 id="updateTitle">Filter updates</h2><span id="updateHost" class="update-host">Bundled</span><p id="updateStatus" class="update-status" role="status">Checking filter status…</p></div><button id="updateButton" class="secondary" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11A8 8 0 0 0 6 6M4 3v5h5M4 13a8 8 0 0 0 14 5m2 3v-5h-5"/></svg><span id="updateLabel">Check for updates</span></button></section>
+          <p class="filters-note" id="filtersFootnote"></p>
+          </details>
+        </div>
+
+        <div id="filtersRules" class="stack" hidden>
+          <section class="card add-card">
+            <div class="card-head tight">
+              <h2 class="card-title">Add a rule</h2>
+              <div id="ruleKind" class="segmented mini" role="radiogroup" aria-label="Rule type">
+                <button class="seg is-active" type="button" role="radio" aria-checked="true" data-rule-kind="block">Block</button>
+                <button class="seg" type="button" role="radio" aria-checked="false" data-rule-kind="allow">Allow</button>
+              </div>
+            </div>
+            <div class="strict-add-row">
+              <input id="strictTarget" type="text" maxlength="512" autocomplete="off" spellcheck="false" placeholder="facebook.com or example.com/path/*" aria-label="Domain or path">
+              <button id="strictAdd" class="secondary" type="button">Add</button>
+            </div>
+            <div id="ruleHint" class="subtle strict-hint"></div>
+            <div id="strictError" class="strict-error" role="status"></div>
+          </section>
+
+          <section class="card">
+            <div class="card-head tight">
+              <h2 class="card-title">Blocked</h2>
+              <div class="head-tools"><span id="strictStatus" class="badge" hidden></span><div id="strictCount" class="pill">0 rules</div></div>
+            </div>
+            <div id="strictList" class="strict-list" role="list"></div>
+          </section>
+
+          <section id="allowlistCard" class="card">
+            <div class="card-head tight">
+              <h2 class="card-title">Allowed sites</h2>
+              <div id="allowCount" class="pill">0 sites</div>
+            </div>
+            <div id="allowlistList" class="strict-list" role="list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="settingsView" class="view settings-screen" hidden>
+        <div class="view-heading"><h2>Settings</h2></div>
+        <section class="settings-main-menu">
+          <button class="settings-row" type="button" data-goto="strict" data-open-filter-tab="lists"><span class="settings-row-icon menu-ad" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></span><span class="settings-row-copy"><strong>Ad Blocking</strong><small>Filter lists and custom rules</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="privacy"><span class="settings-row-icon menu-privacy" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 9 4v6c0 6-6 9-9 11-3-2-9-5-9-11V6Z"/><path d="m9 12 2 2 4-4" fill="none" stroke="white" stroke-width="2"/></svg></span><span class="settings-row-copy"><strong>Privacy Protection</strong><small>Trackers and fingerprint protection</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="social"><span class="settings-row-icon menu-social" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1684ff"/><path d="M14 6h3V3h-3c-4 0-5 2-5 5v2H6v4h3v9h4v-9h3l1-4h-4V8c0-1 0-2 1-2Z" fill="white"/></svg></span><span class="settings-row-copy"><strong>Social Media Cleanup</strong><small>Sponsored posts and social ads</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="cosmetic"><span class="settings-row-icon menu-cosmetic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#ffc343"><path d="m10 1 2.5 7.5L20 11l-7.5 2.5L10 21l-2.5-7.5L0 11l7.5-2.5Z M20 0l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z M20 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg></span><span class="settings-row-copy"><strong>Cosmetic Filtering</strong><small>Remove ad placeholders</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="strict" data-open-filter-tab="rules" data-rule-kind-choice="allow"><span class="settings-row-icon menu-whitelist" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 9 4v6c0 6-6 9-9 11-3-2-9-5-9-11V6Z"/><path d="m9 12 2 2 4-4" fill="none" stroke="white" stroke-width="2"/></svg></span><span class="settings-row-copy"><strong>Allowed websites</strong><small>Sites excluded from filtering</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="appearance"><span class="settings-row-icon menu-appearance" aria-hidden="true">◕</span><span class="settings-row-copy"><strong>Appearance</strong><small>Theme and interface preferences</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="security"><span class="settings-row-icon menu-security" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="m12 2 8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span><span class="settings-row-copy"><strong>Security Protection</strong><small>Phishing, malware and scam protection</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button class="settings-row" type="button" data-goto="data"><span class="settings-row-icon menu-data" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 4 16 4 16 0V5M4 12v7c0 4 16 4 16 0v-7"/></svg></span><span class="settings-row-copy"><strong>Activity &amp; Data</strong><small>Background counts and local history</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+        </section>
+
+
+<div hidden aria-hidden="true"><button id="refreshSettings" class="mini-action" type="button">Refresh status</button>
+        <section class="settings-list-card">
+
+          <button class="settings-row" type="button" data-goto="strict" data-open-filter-tab="lists"><span class="settings-row-icon icon-ad">⊘</span><span class="settings-row-copy"><strong>Ad Blocking</strong><small>Filter lists and custom rules</small></span><span class="row-chevron">›</span></button>
+
+          <button class="settings-row" type="button" data-goto="strict" data-open-filter-tab="rules"><span class="settings-row-icon icon-social">f</span><span class="settings-row-copy"><strong>Whitelists &amp; Rules</strong><small>Allowed websites and permanent blocking</small></span><span id="strictMeta" class="row-meta">0 rules</span><span class="row-chevron">›</span></button>
+          <button class="settings-row" type="button" data-goto="appearance"><span class="settings-row-icon icon-appearance">☼</span><span class="settings-row-copy"><strong>Appearance</strong><small>Theme, motion and popup density</small></span><span class="row-chevron">›</span></button>
+        </section>
+
+
+
+        <section class="settings-list-card">
+          <div class="settings-row recovery-settings-row"><span class="settings-row-icon icon-repair">⌁</span><div class="settings-row-copy"><strong>Compatibility Recovery</strong><small id="recoveryStatus">Checking this site…</small><div class="inline-actions"><button id="recoveryReport" class="mini-action" type="button">Try recovery</button><button id="recoveryClear" class="mini-action muted" type="button" hidden>Restore filtering</button></div></div></div>
+
+          <button id="manageAllowedSites" class="settings-row" type="button"><span class="settings-row-icon icon-sites">◎</span><span class="settings-row-copy"><strong>Allowed Websites</strong><small>Review site exceptions</small></span><span class="row-chevron">›</span></button>
+        </section>
+
+        </div>
+      </section>
+
+      <section id="privacyView" class="view settings-detail-screen" hidden><div class="subscreen-heading"><button class="back-button" type="button" data-goto="settings" aria-label="Back to settings">←</button><h2>Privacy Protection</h2></div>
+        <p class="settings-detail-intro">Control trackers and fingerprint protection.</p><button class="settings-detail-switch" data-settings-feature="privacy" type="button" role="switch" aria-checked="true"><span><strong>Privacy Protection</strong><small>Block trackers and analytics</small></span><span class="switch-visual" aria-hidden="true"></span></button>
+          <div class="settings-row static-row"><span class="settings-row-icon icon-privacy">◆</span><div class="settings-row-copy"><strong>Privacy Protection</strong><small id="privacyModeStatus">Checking privacy hardening…</small></div><select id="privacyModeSelect" aria-label="Fingerprint protection strength"><option value="balanced">Balanced</option><option value="strong">Strong</option><option value="maximum">Maximum</option></select></div>
+        <button class="settings-detail-link" type="button" data-goto="strict" data-open-filter-tab="lists">Manage filter lists <span aria-hidden="true">›</span></button>
+      </section>
+
+      <section id="socialView" class="view settings-detail-screen" hidden><div class="subscreen-heading"><button class="back-button" type="button" data-goto="settings" aria-label="Back to settings">←</button><h2>Social Media Cleanup</h2></div>
+        <p class="settings-detail-intro">Keep social feeds clean and easier to browse.</p><button class="settings-detail-switch" data-settings-feature="ads" type="button" role="switch" aria-checked="true"><span><strong>Social Media Cleanup</strong><small>Shares the Ad Blocking setting</small></span><span class="switch-visual" aria-hidden="true"></span></button>
+        <div class="settings-info-row"><strong>Facebook cleanup</strong><p>Hide sponsored feed items with the existing social cleanup rules.</p></div>
+        <div class="settings-info-row"><strong>YouTube ad protection</strong><p>Uses the current Ad Blocking protection.</p></div>
+        <button class="settings-detail-link" type="button" data-goto="strict" data-open-filter-tab="lists">Manage filter lists <span aria-hidden="true">›</span></button>
+      </section>
+
+      <section id="cosmeticView" class="view settings-detail-screen" hidden><div class="subscreen-heading"><button class="back-button" type="button" data-goto="settings" aria-label="Back to settings">←</button><h2>Cosmetic Filtering</h2></div>
+        <p class="settings-detail-intro">Remove blocked ad containers and empty spaces.</p><button class="settings-detail-switch" data-settings-feature="ads" type="button" role="switch" aria-checked="true"><span><strong>Cosmetic Filtering</strong><small>Shares the Ad Blocking setting</small></span><span class="switch-visual" aria-hidden="true"></span></button>
+        <div class="settings-info-row"><strong>Empty ad spaces</strong><p>Hide containers left behind by blocked advertising.</p></div>
+        <div class="settings-info-row"><strong>Page cleanup</strong><p>Apply the existing cosmetic filters and scriptlets.</p></div>
+        <button class="settings-detail-link" type="button" data-goto="strict" data-open-filter-tab="lists">Manage filter lists <span aria-hidden="true">›</span></button>
+      </section>
+
+
+      <section id="securityView" class="view settings-detail-screen settings-extra-screen" hidden>
+        <div class="subscreen-heading"><button class="back-button" type="button" data-goto="settings" aria-label="Back to settings">←</button><h2>Security Protection</h2></div>
+        <p class="settings-detail-intro">Choose how iShield Extension protects you from unsafe websites.</p>
+          <div class="settings-row static-row">
+            <span class="settings-row-icon icon-shield">✓</span><div class="settings-row-copy"><strong>Global Protection</strong><small id="globalProtectionStatus">Checking protection…</small></div>
+            <button id="globalProtectionToggle" class="toggle" type="button" role="switch" aria-checked="true" aria-label="Protection on all websites" aria-describedby="globalProtectionStatus" disabled><span class="toggle-knob" aria-hidden="true"></span></button>
+          </div>
+        <button class="settings-detail-switch" data-settings-feature="phishing" type="button" role="switch" aria-checked="true"><span><strong>Phishing &amp; malware protection</strong><small>Check deceptive and harmful websites</small></span><span class="switch-visual" aria-hidden="true"></span></button>
+        <button class="settings-detail-switch" data-settings-feature="scam" type="button" role="switch" aria-checked="true"><span><strong>Scam protection</strong><small>Detect suspicious page content</small></span><span class="switch-visual" aria-hidden="true"></span></button>
+          <div class="settings-row static-row"><span class="settings-row-icon icon-health">✓</span><div class="settings-row-copy"><strong>Protection Status</strong><small id="engineHealthSummary">Checking the browser filtering engine…</small></div><span id="engineHealthBadge" class="badge">Checking</span></div>
+        <p class="settings-detail-intro">Allowed websites are excluded from automatic protection.</p>
+      </section>
+      <section id="dataView" class="view settings-detail-screen settings-extra-screen" hidden>
+        <div class="subscreen-heading"><button class="back-button" type="button" data-goto="settings" aria-label="Back to settings">←</button><h2>Activity &amp; Data</h2></div>
+        <p class="settings-detail-intro">Manage activity stored on this device.</p>
+        <p id="activityCoverage" class="coverage-note">Network activity is synchronized from the active tab when you open iShield Extension. Full URLs and website history are not stored.</p>        <section class="settings-list-card">
+          <div class="settings-row stacked-row"><span class="settings-row-icon icon-data">▣</span><div class="settings-row-copy"><strong>Keep detailed history</strong><small>Choose how long event history is retained</small></div><select id="retentionSelect" aria-label="History retention"><option value="1">1 day</option><option value="7">7 days</option><option value="30">30 days</option></select></div>
+          <button id="clearHistory" class="settings-row danger-row" type="button"><span class="settings-row-icon">×</span><span class="settings-row-copy"><strong>Clear detailed history</strong><small>Blocked totals are kept</small></span><span class="row-chevron">›</span></button>
+          <button id="manageExclusions" class="settings-row" type="button"><span class="settings-row-icon" aria-hidden="true">◎</span><span class="settings-row-copy"><strong>Excluded websites</strong><small>View and remove site exceptions</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+          <button id="fullResetButton" class="settings-row danger-row" type="button"><span class="settings-row-icon" aria-hidden="true">↺</span><span class="settings-row-copy"><strong>Full reset</strong><small>Clear all iShield Extension data and restore defaults</small></span><span class="row-chevron" aria-hidden="true">›</span></button>
+        </section>
+      </section>
+
+      <section id="appearanceView" class="view appearance-screen" hidden>
+        <div class="subscreen-heading"><button id="appearanceBack" class="back-button" type="button" aria-label="Back to settings">←</button><div><h2>Appearance</h2><p>Make iShield Extension feel right for you.</p></div></div>
+        <section class="appearance-card">
+          <h3>Theme</h3>
+          <div id="themeControl" class="theme-picker" role="radiogroup" aria-label="Theme">
+            <button type="button" role="radio" aria-checked="false" data-theme-choice="light"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></svg></span><strong>Light</strong></button>
+            <button type="button" role="radio" aria-checked="false" data-theme-choice="dark"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20 16A9 9 0 0 1 8 4a9 9 0 1 0 12 12Z"/></svg></span><strong>Dark</strong></button>
+            <button type="button" role="radio" aria-checked="false" data-theme-choice="system"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8m-4-4v4"/></svg></span><strong>System</strong></button>
+          </div>
+        </section>
+        <section class="appearance-card appearance-options">
+          <div class="appearance-option"><div><strong>Language</strong><small>Interface language</small></div><select aria-label="Language" disabled><option>English</option></select></div>
+          <div class="appearance-option badge-appearance-option"><div><strong>Show site statistics in badge</strong></div><button class="toggle" type="button" role="switch" aria-checked="true" aria-label="Show site statistics in badge" disabled title="The protection engine manages the badge automatically"><span class="toggle-knob" aria-hidden="true"></span></button></div>
+          <div class="appearance-option"><div><strong>Animations</strong><small>Use subtle protection motion</small></div><button id="motionToggle" class="toggle" type="button" role="switch" aria-checked="true" aria-label="Animations"><span class="toggle-knob" aria-hidden="true"></span></button></div>
+          <div class="appearance-option"><div><strong>Popup density</strong><small>All screens use the same width</small></div><select id="densitySelect" aria-label="Popup density"><option value="comfortable">Standard</option><option value="compact">Compact</option></select></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" hidden>
+      <span id="toastText"></span>
+      <button id="toastAction" class="toast-action" type="button" hidden></button>
+    </div>
+
+    <nav class="nav" aria-label="iShield Extension sections">
+      <button class="nav-item is-active" type="button" data-view="overview" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M5.8 9.8v9.7h4.4v-5.6h3.6v5.6h4.4V9.8"/></svg><span>Home</span></button>
+      <button class="nav-item" type="button" data-view="site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 5h13M8 12h13M8 19h13"/><circle cx="3" cy="5" r="1"/><circle cx="3" cy="12" r="1"/><circle cx="3" cy="19" r="1"/></svg><span>This Site</span></button>
+      <button class="nav-item" type="button" data-view="activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 20V11M12 20V4.5M18 20v-6.5"/></svg><span>Statistics</span></button>
+      <button class="nav-item" type="button" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="m12 2-8 4v6c0 5 4 8 8 10 4-2 8-5 8-10V6Z"/><path d="m8 12 3 3 5-6"/></svg><span>Settings</span></button>
+    </nav>
+  </div>
+  <dialog id="activityDetailsDialog" class="confirmation-dialog activity-details-dialog" aria-labelledby="activityDetailsTitle"><span id="activityDetailsIcon" class="event-icon" aria-hidden="true"></span><h2 id="activityDetailsTitle"></h2><p id="activityDetailsDescription"></p><dl class="activity-detail-fields"><div><dt>Count</dt><dd id="activityDetailsCount"></dd></div><div><dt>Scope / time</dt><dd id="activityDetailsTime"></dd></div></dl><div class="confirmation-actions"><button id="closeActivityDetails" class="primary-button" type="button">Done</button></div></dialog>
+        <dialog id="advancedSettingsDialog" class="settings-options-dialog information-dialog" aria-labelledby="advancedSettingsTitle"><div class="information-heading"><img class="information-logo" src="../icons/icon-128.png" alt=""/><div class="information-brand"><h2 id="advancedSettingsTitle">iShield Extension</h2><p>Privacy. Safety. A Cleaner Web.</p></div><button id="closeAdvancedSettings" class="icon-button" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button></div><nav class="information-menu" aria-label="iShield Extension information"><a href="https://broxme.com/ishield/privacy/" target="_blank" rel="noopener noreferrer" class="information-row information-privacy"><span class="information-icon info-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/><path d="M12 14v3"/></svg></span><span class="information-copy"><strong>Privacy</strong><small>How we handle your data</small></span><span class="information-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-10 10M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></svg></span></a><button id="openLicense" type="button" class="information-row information-license"><span class="information-icon info-license"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 7h8M8 12h8M8 17h6"/></svg></span><span class="information-copy"><strong>Licenses</strong><small>View iShield Extension and bundled open-source licenses</small></span><span class="local-license-badge" title="License information is included with iShield Extension"><i aria-hidden="true"></i>Included</span><span class="information-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span></button><a href="https://broxme.com/terms/" target="_blank" rel="noopener noreferrer" class="information-row information-terms"><span class="information-icon info-terms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 12h8M8 17h6M8 7h2"/></svg></span><span class="information-copy"><strong>Terms</strong><small>Terms of service</small></span><span class="information-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-10 10M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></svg></span></a><a href="https://broxme.com/ishield/" target="_blank" rel="noopener noreferrer" class="information-row information-about"><span class="information-icon info-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7h.01"/></svg></span><span class="information-copy"><strong>About</strong><small>Learn more about iShield Extension</small></span><span class="information-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-10 10M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></svg></span></a><div class="information-row information-version"><span class="information-icon info-version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/><path d="m3 7 9 5 9-5M12 12v10M7.5 4.5l9 5"/></svg></span><span class="information-copy"><strong>Version</strong><small>Current extension version</small></span><strong id="versionText">—</strong></div></nav></dialog>
+        <dialog id="licenseDialog" class="settings-options-dialog license-dialog" aria-labelledby="licenseTitle">
+          <div class="statistics-options-heading"><button id="backFromLicense" class="icon-button" type="button" aria-label="Back to menu">←</button><h2 id="licenseTitle">License</h2><button id="closeLicense" class="icon-button" type="button" aria-label="Close license">×</button></div>
+          <p class="subtle">iShield Extension code is licensed under MIT or Apache 2.0.<br>Bundled components and filter lists retain their own licenses.</p>
+          <div id="licenseContents" aria-live="polite"></div>
+        </dialog>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

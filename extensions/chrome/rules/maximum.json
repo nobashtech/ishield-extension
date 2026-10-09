@@ -1,0 +1,158 @@
+[
+  {
+    "id": 3001,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "amazon-adsystem.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 3002,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "rlcdn.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 3003,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "bluekai.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 3004,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "bidswitch.net"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 3005,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "contextweb.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 3006,
+    "priority": 120,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "sharethrough.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  }
+]

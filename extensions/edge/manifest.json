@@ -1,0 +1,170 @@
+{
+  "manifest_version": 3,
+  "name": "iShield Extension",
+  "version": "1.0.0.1",
+  "homepage_url": "https://broxme.com/ishield/",
+  "description": "Fast ad and tracker blocker with phishing, scam and malware protection. Filtering runs on your device, with no account or tracking.",
+  "incognito": "not_allowed",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "minimum_chrome_version": "137",
+  "permissions": [
+    "activeTab",
+    "declarativeNetRequest",
+    "storage",
+    "scripting",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "src/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "iShield Extension",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ishield_core",
+        "enabled": true,
+        "path": "rules/core.json"
+      },
+      {
+        "id": "ishield_strong",
+        "enabled": true,
+        "path": "rules/strong.json"
+      },
+      {
+        "id": "ishield_maximum",
+        "enabled": false,
+        "path": "rules/maximum.json"
+      },
+      {
+        "id": "ishield_production_base",
+        "enabled": true,
+        "path": "rules/production/production-base.json"
+      },
+      {
+        "id": "ishield_production_tracking",
+        "enabled": true,
+        "path": "rules/production/production-tracking.json"
+      },
+      {
+        "id": "ishield_production_ublock",
+        "enabled": true,
+        "path": "rules/production/production-ublock.json"
+      },
+      {
+        "id": "ishield_production_pgl",
+        "enabled": true,
+        "path": "rules/production/production-pgl.json"
+      },
+      {
+        "id": "ishield_production_urlhaus",
+        "enabled": true,
+        "path": "rules/production/production-urlhaus.json"
+      },
+      {
+        "id": "ishield_production_badware",
+        "enabled": true,
+        "path": "rules/production/production-badware.json"
+      },
+      {
+        "id": "ishield_production_easylist",
+        "enabled": false,
+        "path": "rules/production/production-easylist.json"
+      },
+      {
+        "id": "ishield_production_easyprivacy",
+        "enabled": false,
+        "path": "rules/production/production-easyprivacy.json"
+      },
+      {
+        "id": "ishield_production_mobile",
+        "enabled": false,
+        "path": "rules/production/production-mobile.json"
+      },
+      {
+        "id": "ishield_production_urltracking",
+        "enabled": false,
+        "path": "rules/production/production-urltracking.json"
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "web-accessible-resources/redirects/1x1-transparent.gif",
+        "web-accessible-resources/redirects/2x2-transparent.png",
+        "web-accessible-resources/redirects/32x32-transparent.png",
+        "web-accessible-resources/redirects/amazon-apstag.js",
+        "web-accessible-resources/redirects/ati-smarttag.js",
+        "web-accessible-resources/redirects/fingerprintjs2.js",
+        "web-accessible-resources/redirects/fingerprintjs3.js",
+        "web-accessible-resources/redirects/gemius.js",
+        "web-accessible-resources/redirects/google-analytics-ga.js",
+        "web-accessible-resources/redirects/google-analytics.js",
+        "web-accessible-resources/redirects/google-ima3.js",
+        "web-accessible-resources/redirects/googlesyndication-adsbygoogle.js",
+        "web-accessible-resources/redirects/googletagservices-gpt.js",
+        "web-accessible-resources/redirects/metrika-yandex-tag.js",
+        "web-accessible-resources/redirects/metrika-yandex-watch.js",
+        "web-accessible-resources/redirects/noopcss.css",
+        "web-accessible-resources/redirects/noopframe.html",
+        "web-accessible-resources/redirects/noopjs.js",
+        "web-accessible-resources/redirects/noopjson.json",
+        "web-accessible-resources/redirects/noopmp3.mp3",
+        "web-accessible-resources/redirects/noopmp4.mp4",
+        "web-accessible-resources/redirects/nooptext.js",
+        "web-accessible-resources/redirects/noopvast02.xml",
+        "web-accessible-resources/redirects/noopvast03.xml",
+        "web-accessible-resources/redirects/noopvast04.xml",
+        "web-accessible-resources/redirects/noopvmap01.xml",
+        "web-accessible-resources/redirects/prebid-ads.js",
+        "web-accessible-resources/redirects/prevent-fab-3.2.0.js",
+        "web-accessible-resources/redirects/scorecardresearch-beacon.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "use_dynamic_url": true
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/cosmetic-rules.js",
+        "content/cosmetic-runtime.js",
+        "content/phishing-probe.js",
+        "content/scam-probe.js",
+        "content/malware-probe.js",
+        "content/breakage-probe.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  },
+  "short_name": "iShield"
+}

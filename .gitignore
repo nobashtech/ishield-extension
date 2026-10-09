@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local release work
+*.crx
+*.xpi
+release/
+artifacts/

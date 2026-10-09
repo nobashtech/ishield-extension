@@ -1,0 +1,159 @@
+{
+  "importedAt": "2026-10-03T22:54:49.715Z",
+  "note": "Filter lists are third-party data bundled unmodified except for lossless rule merging (scripts/lib/dnr-compact.mjs) and, for uBlock Origin sources, removal of rule shapes that are not portable. Verify each list's license before redistribution.",
+  "sources": {
+    "AdGuard": {
+      "package": "@adguard/dnr-rulesets",
+      "build": "5.0.20260907123943",
+      "redirectStubs": "@adguard/tswebextension war output, from @adguard/scriptlets (GPL-3.0-only)"
+    },
+    "uBlock Origin": {
+      "repository": "uBlockOrigin/uBOL-home",
+      "directory": "chromium/rulesets/main",
+      "commit": "981a6b4c55da4bd8b1b94e780cc7813858c315c2",
+      "commitDate": "2026-09-30T12:29:06Z"
+    }
+  },
+  "filters": [
+    {
+      "id": "base",
+      "suffix": "production_base",
+      "provider": "AdGuard",
+      "name": "AdGuard Base filter",
+      "description": "Blocks ads, pop-ups and banners",
+      "source": "AdGuard Base filter",
+      "homepage": "https://adguard.com/kb/general/ad-filtering/adguard-filters/",
+      "license": "GPL-3.0",
+      "layer": "ads",
+      "default": true,
+      "ruleCount": 13106,
+      "upstreamRuleCount": 71703
+    },
+    {
+      "id": "tracking",
+      "suffix": "production_tracking",
+      "provider": "AdGuard",
+      "name": "AdGuard Tracking Protection filter",
+      "description": "Blocks trackers and analytics",
+      "source": "AdGuard Tracking Protection",
+      "homepage": "https://adguard.com/kb/general/ad-filtering/adguard-filters/",
+      "license": "GPL-3.0",
+      "layer": "privacy",
+      "default": true,
+      "ruleCount": 8996,
+      "upstreamRuleCount": 115653
+    },
+    {
+      "id": "ublock",
+      "suffix": "production_ublock",
+      "provider": "uBlock Origin",
+      "name": "uBlock filters",
+      "description": "uBlock Origin’s own ad and annoyance rules",
+      "source": "uBlock filters",
+      "homepage": "https://github.com/uBlockOrigin/uAssets",
+      "license": "GPL-3.0",
+      "layer": "ads",
+      "default": true,
+      "ruleCount": 4623,
+      "upstreamRuleCount": 4623
+    },
+    {
+      "id": "pgl",
+      "suffix": "production_pgl",
+      "provider": "uBlock Origin",
+      "name": "Peter Lowe’s list",
+      "description": "Peter Lowe’s list of known ad and tracker hosts",
+      "source": "Peter Lowe’s list",
+      "homepage": "https://pgl.yoyo.org/adservers/",
+      "license": "see homepage",
+      "layer": "privacy",
+      "default": true,
+      "ruleCount": 4,
+      "upstreamRuleCount": 1
+    },
+    {
+      "id": "urlhaus",
+      "suffix": "production_urlhaus",
+      "provider": "uBlock Origin",
+      "name": "URLhaus",
+      "description": "Hosts serving malware, from abuse.ch URLhaus",
+      "source": "URLhaus",
+      "homepage": "https://urlhaus.abuse.ch/",
+      "license": "CC0-1.0",
+      "layer": "phishing",
+      "default": true,
+      "ruleCount": 4,
+      "upstreamRuleCount": 1
+    },
+    {
+      "id": "badware",
+      "suffix": "production_badware",
+      "provider": "uBlock Origin",
+      "name": "uBlock badware risks",
+      "description": "Fake sites and risky downloads flagged by uBlock Origin",
+      "source": "uBlock badware risks",
+      "homepage": "https://github.com/uBlockOrigin/uAssets",
+      "license": "GPL-3.0",
+      "layer": "phishing",
+      "default": true,
+      "ruleCount": 433,
+      "upstreamRuleCount": 432
+    },
+    {
+      "id": "easylist",
+      "suffix": "production_easylist",
+      "provider": "uBlock Origin",
+      "name": "EasyList",
+      "description": "The classic ad-blocking list (overlaps Ads & annoyances)",
+      "source": "EasyList",
+      "homepage": "https://easylist.to/",
+      "license": "GPL-3.0 / CC BY-SA 3.0",
+      "layer": "ads",
+      "default": false,
+      "ruleCount": 3747,
+      "upstreamRuleCount": 3702
+    },
+    {
+      "id": "easyprivacy",
+      "suffix": "production_easyprivacy",
+      "provider": "uBlock Origin",
+      "name": "EasyPrivacy",
+      "description": "The classic tracker list (overlaps Tracking protection)",
+      "source": "EasyPrivacy",
+      "homepage": "https://easylist.to/",
+      "license": "GPL-3.0 / CC BY-SA 3.0",
+      "layer": "privacy",
+      "default": false,
+      "ruleCount": 9052,
+      "upstreamRuleCount": 9006
+    },
+    {
+      "id": "mobile",
+      "suffix": "production_mobile",
+      "provider": "AdGuard",
+      "name": "AdGuard Mobile Ads filter",
+      "description": "Extra rules for ads in mobile-style pages",
+      "source": "AdGuard Mobile Ads",
+      "homepage": "https://adguard.com/kb/general/ad-filtering/adguard-filters/",
+      "license": "GPL-3.0",
+      "layer": "ads",
+      "default": false,
+      "ruleCount": 581,
+      "upstreamRuleCount": 1529
+    },
+    {
+      "id": "urltracking",
+      "suffix": "production_urltracking",
+      "provider": "AdGuard",
+      "name": "AdGuard URL Tracking filter",
+      "description": "Strips tracking parameters from links",
+      "source": "AdGuard URL Tracking",
+      "homepage": "https://adguard.com/kb/general/ad-filtering/adguard-filters/",
+      "license": "GPL-3.0",
+      "layer": "privacy",
+      "default": false,
+      "ruleCount": 2451,
+      "upstreamRuleCount": 2460
+    }
+  ]
+}

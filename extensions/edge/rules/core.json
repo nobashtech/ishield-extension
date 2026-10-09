@@ -1,0 +1,210 @@
+[
+  {
+    "id": 1001,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "doubleclick.net"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1002,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "googlesyndication.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1003,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "googleadservices.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1004,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "adnxs.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1005,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "adsrvr.org"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1006,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "casalemedia.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1007,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "pubmatic.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 1008,
+    "priority": 100,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "rubiconproject.com"
+      ],
+      "domainType": "thirdParty",
+      "resourceTypes": [
+        "script",
+        "image",
+        "stylesheet",
+        "object",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "font",
+        "ping",
+        "websocket",
+        "other"
+      ]
+    }
+  }
+]

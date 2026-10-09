@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>iShield Extension for Firefox Privacy Policy</title>
+  <meta name="description" content="Privacy policy for the iShield Extension browser extension for Firefox.">
+  <style>
+    :root{color-scheme:light dark;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
+    body{margin:0;background:#fff;color:#172033}main{max-width:780px;margin:auto;padding:56px 24px 80px}h1{font-size:2.25rem;line-height:1.15;margin:0 0 8px}h2{margin-top:34px;font-size:1.25rem}p,li{font-size:1rem}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}a{color:#005dfc}.meta{color:#667085;margin:0 0 36px}.summary{padding:18px 20px;border:1px solid #d8dee9;border-radius:14px;background:#f8fafc}@media(prefers-color-scheme:dark){body{background:#101217;color:#ecf0f7}.meta{color:#aab3c2}.summary{background:#171b23;border-color:#303744}a{color:#76a8ff}}
+  </style>
+</head>
+<body><main>
+  <h1>iShield Extension for Firefox Privacy Policy</h1>
+  <p class="meta">Effective: October 5, 2026 · Applies to iShield Extension for Firefox desktop, version 1.0.0.1 and later versions that link to this policy.</p>
+
+  <div class="summary"><strong>Short version:</strong> iShield Extension processes the information it needs to protect web pages on your device. It does not send your browsing history, visited URLs, page content, search terms, account information, extension usage, device identifiers, installation identifiers, telemetry, analytics, or advertising identifiers to us or to a third party. Its only extension-initiated remote connection is a fixed HTTPS request used to download signed filter-rule updates.</div>
+
+  <h2>1. What iShield Extension does</h2>
+  <p>iShield Extension blocks ads and trackers and provides phishing, scam, malware, fingerprinting, cosmetic-filtering, and anti-breakage protections. To perform these functions, Firefox grants iShield Extension access to supported web pages and network-request filtering APIs.</p>
+
+  <h2>2. Information processed locally</h2>
+  <p>To provide protection, iShield Extension may inspect the current page URL or hostname, network-request details exposed by Firefox's extension APIs, and limited page content needed for cosmetic filtering, anti-adblock handling, phishing/scam checks, and breakage protection. This processing happens locally in your browser.</p>
+  <p>Settings, allowlists, protection modes, locally calculated blocking counters, and the current verified filter-update state may be stored in Firefox extension storage on your device. iShield Extension does not maintain a remote account or cloud profile for this data.</p>
+
+  <h2>3. Data iShield Extension does not collect or transmit</h2>
+  <p>iShield Extension does not intentionally collect or transmit personal data or technical/interaction data for storage or processing outside the extension. In particular, iShield Extension does not transmit:</p>
+  <ul>
+    <li>browsing history, visited URLs, page content, search terms, or form content;</li>
+    <li>names, email addresses, account credentials, cookies, authentication data, or payment information;</li>
+    <li>device IDs, installation IDs, advertising IDs, or other persistent user identifiers;</li>
+    <li>extension usage analytics, telemetry, crash reports, or behavioral metrics;</li>
+    <li>managed-device, enrollment, family-control, or enterprise-control information.</li>
+  </ul>
+
+  <h2>4. Signed filter updates</h2>
+  <p>iShield Extension periodically checks one fixed public endpoint for updated blocking filters:</p>
+  <p><code>https://update.broxme.com/ishield/manifest.json</code></p>
+  <p>The extension sends a generic HTTPS <code>GET</code> request only. iShield Extension adds no query parameters, request body, credentials, cookies, referrer, installation identifier, device identifier, browsing information, or telemetry to that request. The extension accepts only a signed network-rule resource, verifies the signature and safety limits locally, and then updates local Declarative Net Request rules.</p>
+  <p>The update channel cannot deliver JavaScript, WebAssembly, or other executable extension logic. All executable extension code is packaged with the Firefox add-on.</p>
+  <p>As with any ordinary HTTPS connection, normal network infrastructure may necessarily process connection-level information such as an IP address and standard browser networking metadata. iShield Extension does not read that information from your device, append it to the update request, use it as an identifier, or use the filter-update channel for profiling or analytics.</p>
+
+  <h2>5. Private browsing</h2>
+  <p>The Firefox release of iShield Extension declares private browsing as not allowed. It does not run in Firefox private windows.</p>
+
+  <h2>6. Permissions</h2>
+  <ul>
+    <li><strong>declarativeNetRequest:</strong> blocks or redirects unwanted network requests using packaged and signed filter rules.</li>
+    <li><strong>Host access to HTTP and HTTPS pages:</strong> provides protection across websites and allows local page-level filtering.</li>
+    <li><strong>scripting:</strong> runs packaged cosmetic-filtering and protection code where needed. It is not used to download remote executable code.</li>
+    <li><strong>storage:</strong> keeps settings, allowlists, local counters, and verified filter-update state on your device.</li>
+    <li><strong>alarms:</strong> schedules filter-update checks and local maintenance.</li>
+    <li><strong>activeTab:</strong> allows user-initiated toolbar interactions with the currently active tab, including local protection status and matched-rule information.</li>
+  </ul>
+
+  <h2>7. Retention and deletion</h2>
+  <p>iShield Extension stores only the local extension data required for its features. You can change or clear supported settings from iShield. Removing the extension causes Firefox to remove its extension storage according to Firefox behavior.</p>
+
+  <h2>8. Sale, advertising, and profiling</h2>
+  <p>iShield Extension does not sell user data, share user data for advertising, inject affiliate tracking, or create profiles of users or their browsing activity.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>If a future version materially changes iShield Extension's data practices, the privacy policy and Firefox data-collection declaration will be updated before that version is released.</p>
+
+  <h2>10. Contact</h2>
+  <p>For iShield Extension support or privacy questions, use the official iShield Extension website: <a href="https://broxme.com/ishield/">https://broxme.com/ishield/</a>.</p>
+</main></body>
+</html>

@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible iShield extension problem
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options: [Chrome, Edge, Firefox, Opera, Brave, Other]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: iShield version
+      placeholder: 1.0.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+  - type: markdown
+    attributes:
+      value: "Do not post passwords, private browsing history, API keys, signing keys, or other sensitive data."

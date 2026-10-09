@@ -1,0 +1,24 @@
+/* iShield: hides YouTube's ad containers. Video ads themselves are handled by youtube-ads-main.js. */
+#masthead-ad,
+#player-ads,
+.video-ads,
+.ytp-ad-overlay-container,
+.ytp-ad-overlay-slot,
+ytd-ad-slot-renderer,
+ytd-in-feed-ad-layout-renderer,
+ytd-banner-promo-renderer,
+ytd-statement-banner-renderer,
+ytd-display-ad-renderer,
+ytd-promoted-sparkles-web-renderer,
+ytd-promoted-video-renderer,
+ytd-companion-slot-renderer,
+ytd-action-companion-ad-renderer,
+ytd-player-legacy-desktop-watch-ads-renderer,
+ytd-ads-engagement-panel-content-renderer,
+ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"],
+ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+ytd-rich-section-renderer:has(ytd-ad-slot-renderer),
+ytm-promoted-sparkles-web-renderer,
+ytm-companion-ad-renderer {
+  display: none !important;
+}

@@ -1,0 +1,6 @@
+Repository name: ishield-extension
+Project title: iShield Extension
+Description: Open-source browser extension for ad and tracker blocking with local privacy and security protections.
+Suggested topics: browser-extension, adblock, privacy, chrome-extension, firefox-addon, edge-extension, opera-extension, manifest-v3
+Version: 1.0.0.1 (source snapshot)
+Maintainer: Nobash LLC
